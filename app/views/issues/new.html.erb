@@ -1,0 +1,22 @@
+<h1>Issues a book</h1>
+
+<% @borrowed_book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+
+<%= form_tag issues_path, method: :post do |form| %>
+  <div class="field">
+    <%= label_tag "Books" %>
+    <%= select_tag :book_id, options_for_select(@books.map { |book| [book.title, book.id] }) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag "Students" %>
+    <%= select_tag :student_id, options_for_select(@students.map { |student| [student.name, student.id] }) %>
+  </div>
+
+  <%= submit_tag "Issue a book" %>
+<% end %>
+
+
+<%= link_to 'Back', books_path %>
